@@ -1,10 +1,6 @@
 python-telegram-handler
 ***********************
-.. image:: https://codeclimate.com/github/prettyirrelevant/python-telegram-handler/badges/gpa.svg
-   :target: https://codeclimate.com/github/prettyirrelevant/python-telegram-handler
-   :alt: Code Climate
-
-.. image:: https://img.shields.io/github/license/prettyirrelevant/python-telegram-handler.svg
+.. image:: https://img.shields.io/github/license/prettyirrelevant/python-telegram-handler?style=for-the-badge
     :target: https://raw.githubusercontent.com/sashgorokhov/python-telegram-handler/master/LICENSE
 
 
