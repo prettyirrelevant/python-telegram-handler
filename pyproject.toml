@@ -24,8 +24,7 @@ description = "A python logging handler that sends logs via Telegram Bot API"
 python = "^3.8"
 requests = "^2.31.0"
 
-
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.group.test.dependencies]
 pytest = "^7.4.3"
 pytest-cov = "^4.1.0"
 tox = "^4.11.4"
