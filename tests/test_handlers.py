@@ -41,7 +41,7 @@ class MockLoggingHandler(logging.Handler):
 
 @pytest.fixture
 def handler():
-    handler = telegram_handler.handlers.TelegramHandler('foo', 'bar', level=logging.DEBUG)
+    handler = telegram_handler.handlers.TelegramHandler(token='foo', chat_id='bar', level=logging.DEBUG)
     telegram_handler.handlers.logger.handlers = []
     telegram_handler.handlers.logger.addHandler(MockLoggingHandler())
     telegram_handler.handlers.logger.level = logging.DEBUG
@@ -123,7 +123,7 @@ def test_get_chat_id_telegram_error(handler):
 
 
 def test_get_chat_id_no_response(handler):
-    with mock.patch.object(handler, 'request') as patch:
+    with mock.patch.object(handler, 'make_request') as patch:
         patch.return_value = None
         value = handler.get_chat_id()
 

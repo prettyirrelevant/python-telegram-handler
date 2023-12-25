@@ -137,3 +137,10 @@ exclude = [".venv", ".tox"]
 
 [tool.ruff.lint.flake8-quotes]
 inline-quotes = "single"
+
+
+
+[tool.coverage.run]
+branch = true
+source = "telegram_handler"
+omit = ["telegram_handler/__init__.py", "telegram_handler/__main__.py"]

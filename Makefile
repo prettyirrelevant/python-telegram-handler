@@ -9,3 +9,7 @@ format:
 	isort $(LINT_PATHS)
 	ruff $(LINT_PATHS) --fix
 	black $(LINT_PATHS)
+
+test:
+	@echo "Running tests..."
+	pytest --cov -s
