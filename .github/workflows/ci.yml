@@ -40,5 +40,6 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           flags: ${{ matrix.python-version }}
+          files: .coverage.xml
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
