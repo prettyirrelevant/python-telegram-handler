@@ -1,27 +1,11 @@
 python-telegram-handler
 ***********************
-
-.. image:: https://img.shields.io/pypi/status/python-telegram-handler.svg
-    :target: https://github.com/sashgorokhov/python-telegram-handler
-
-.. image:: https://img.shields.io/pypi/pyversions/python-telegram-handler.svg
-    :target: https://pypi.python.org/pypi/python-telegram-handler
-
-.. image:: https://badge.fury.io/py/python-telegram-handler.svg 
-    :target: https://badge.fury.io/py/python-telegram-handler 
-
-.. image:: https://travis-ci.org/sashgorokhov/python-telegram-handler.svg?branch=master 
-    :target: https://travis-ci.org/sashgorokhov/python-telegram-handler 
-
-.. image:: https://codecov.io/github/sashgorokhov/python-telegram-handler/coverage.svg?branch=master 
-    :target: https://codecov.io/github/sashgorokhov/python-telegram-handler?branch=master 
-
-.. image:: https://codeclimate.com/github/sashgorokhov/python-telegram-handler/badges/gpa.svg
-   :target: https://codeclimate.com/github/sashgorokhov/python-telegram-handler
+.. image:: https://codeclimate.com/github/prettyirrelevant/python-telegram-handler/badges/gpa.svg
+   :target: https://codeclimate.com/github/prettyirrelevant/python-telegram-handler
    :alt: Code Climate
 
-.. image:: https://img.shields.io/github/license/sashgorokhov/python-telegram-handler.svg 
-    :target: https://raw.githubusercontent.com/sashgorokhov/python-telegram-handler/master/LICENSE 
+.. image:: https://img.shields.io/github/license/prettyirrelevant/python-telegram-handler.svg
+    :target: https://raw.githubusercontent.com/sashgorokhov/python-telegram-handler/master/LICENSE
 
 
 A python logging handler that sends logs via Telegram Bot Api
@@ -42,14 +26,14 @@ Register a new telegram bot and obtain a ``authentication token``. (Instructions
 
 After that, you must obtain a ``chat_id``. You can do that using included simple script. Start a new conversation with newly created bot, write something to it (it is important to initiate conversation first).
 
-Also, there is an ability for handler to automatically retrieve ``chat_id``. This will be done on handler initialization. But you still have to start a conversation with bot. Be aware: if program stops, server restarts, or something else will happen - handler will try to retrieve chat id from telegram, and may fail, if it will not find a NEW message from you. So i recommend you to use a script below for obtaining chat id. 
+Also, there is an ability for handler to automatically retrieve ``chat_id``. This will be done on handler initialization. But you still have to start a conversation with bot. Be aware: if program stops, server restarts, or something else will happen - handler will try to retrieve chat id from telegram, and may fail, if it will not find a NEW message from you. So i recommend you to use a script below for obtaining chat id.
 
 Then run a command:
 
 .. code-block:: shell
 
     python -m telegram_handler <your token here>
-    
+
 If all went ok, a ``chat_id`` will be printed to stdout.
 
 Using ``token`` and ``chat_id``, configure log handler in your desired way.
@@ -84,7 +68,7 @@ If you want to tweak it, configure a ``telegram_handler.HtmlFormatter`` with you
 Using a dictConfig:
 
 .. code-block:: python
-        
+
         ...
         {
             'formatters': {
@@ -105,7 +89,7 @@ Using a dictConfig:
         ...
 
 If you wish, you can enable emoji symbols in HtmlFormatter. Just specify `use_emoji=True` in HtmlFormatter settings.
-This will add to levelname a :white_circle: for DEBUG, :large_blue_circle: for INFO, and :red_circle: for WARNING and ERROR levels. 
+This will add to levelname a :white_circle: for DEBUG, :large_blue_circle: for INFO, and :red_circle: for WARNING and ERROR levels.
 
 Proxy
 ===========
@@ -114,7 +98,7 @@ In case if you have to use this package inside the country where Telegram server
 Using a dictConfig:
 
 .. code-block:: python
-        
+
         ...
         {
             'handlers': {
