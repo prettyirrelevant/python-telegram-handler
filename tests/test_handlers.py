@@ -1,7 +1,7 @@
 import json
 import logging
+from unittest import mock
 
-import mock
 import pytest
 import requests
 
@@ -17,9 +17,8 @@ class MockLoggingHandler(logging.Handler):
     """
 
     def __init__(self, *args, **kwargs):
-        self.messages = {'debug': [], 'info': [], 'warning': [], 'error': [],
-                         'critical': []}
-        super(MockLoggingHandler, self).__init__(*args, **kwargs)
+        self.messages = {'debug': [], 'info': [], 'warning': [], 'error': [], 'critical': []}
+        super().__init__(*args, **kwargs)
 
     def emit(self, record):
         "Store a message from ``record`` in the instance's ``messages`` dict."
@@ -61,6 +60,7 @@ def test_emit(handler):
     assert 'hello' in patch.call_args[1]['json']['text']
     assert patch.call_args[1]['json']['parse_mode'] == 'HTML'
 
+
 def test_emit_big_message(handler):
     message = '*' * telegram_handler.handlers.MAX_MESSAGE_LEN
 
@@ -79,7 +79,7 @@ def test_emit_http_exception(handler):
     with mock.patch('requests.post') as patch:
         response = requests.Response()
         response.status_code = 500
-        response._content = 'Server error'.encode()
+        response._content = b'Server error'
         patch.return_value = response
         handler.emit(record)
 
@@ -158,6 +158,7 @@ def test_handler_init_without_chat():
 
         assert handler.level == logging.NOTSET
 
+
 def test_handler_respects_proxy():
     proxies = {
         'http': 'http_proxy_sample',
@@ -165,13 +166,14 @@ def test_handler_respects_proxy():
     }
 
     handler = telegram_handler.handlers.TelegramHandler('foo', 'bar', level=logging.INFO, proxies=proxies)
-    
+
     record = logging.makeLogRecord({'msg': 'hello'})
 
     with mock.patch('requests.post') as patch:
         handler.emit(record)
 
     assert patch.call_args[1]['proxies'] == proxies
+
 
 def test_custom_formatter(handler):
     handler.setFormatter(logging.Formatter())
