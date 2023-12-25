@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "python-telegram-handler"
 license = "MIT"
-version = "2.2.1"
+version = "2.2.2"
 readme = "README.rst"
 packages = [{ include = "telegram_handler" }]
 authors = ["Isaac Adewumi <ienioladewumi@gmail.com>"]
@@ -133,7 +133,8 @@ ignore = ["E722", "S113", "PLR0913", "PLR0917", "FBT001", "FBT002"]
 exclude = [".venv", ".tox"]
 
 [tool.ruff.per-file-ignores]
-"**/test_**.py" = ["S101", "SLF001", "TRY301"]
+"**/test_**.py" = ["S101", "SLF001", "TRY301", "S106"]
+"telegram_handler/__init__.py" = ["T201"]
 
 [tool.ruff.lint.flake8-quotes]
 inline-quotes = "single"

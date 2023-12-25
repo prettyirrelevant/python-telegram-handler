@@ -17,7 +17,6 @@ MAX_MESSAGE_LEN = 4096
 
 class TelegramHandler(logging.Handler):
     API_ENDPOINT = 'https://api.telegram.org'
-    last_response = None
 
     def __init__(
         self,
@@ -56,13 +55,13 @@ class TelegramHandler(logging.Handler):
         if getattr(self.formatter, 'parse_mode', None):
             data['parse_mode'] = self.formatter.parse_mode
 
-        if len(text) < MAX_MESSAGE_LEN:
-            response = self.send_message(text, **data)
-        else:
-            response = self.send_document(text=text[:1000], document=BytesIO(text.encode()), **data)
-
-        if response and not response.get('ok', False):
-            logger.warning('Telegram responded with ok=false status! %s', response)
+        try:
+            if len(text) < MAX_MESSAGE_LEN:
+                self.send_message(text, **data)
+            else:
+                self.send_document(text=text[:1000], document=BytesIO(text.encode()), **data)
+        except:
+            logger.exception('Error sending message/document with payload %s due to:', data)
 
     def send_message(self, text: str, **kwargs):
         kwargs.update({'text': text})
@@ -77,36 +76,28 @@ class TelegramHandler(logging.Handler):
         )
 
     def make_request(self, method, **kwargs):
-        response = None
         url = self.format_url(method)
 
         kwargs.setdefault('timeout', self.timeout)
         kwargs.setdefault('proxies', self.proxies)
 
-        try:
-            response = requests.post(url, **kwargs)
-            self.last_response = response
-            response.raise_for_status()
-            return response.json()
-        except:
-            logger.exception('Error while making POST to %s', url)
-            logger.debug(str(kwargs))
-            if response is not None:
-                logger.debug(response.content)
+        response = requests.post(url, **kwargs)
+        response.raise_for_status()
 
-        return response
+        return response.json()
 
     def get_chat_id(self):
-        response = self.make_request('getUpdates')
-        if not response or not response.get('ok', False):
-            logger.error('Telegram response is not ok: %s', str(response))
+        try:
+            response = self.make_request('getUpdates')
+        except:
+            logger.exception('Request to method "getUpdates" failed due to:')
             return None
 
         try:
             return response['result'][-1]['message']['chat']['id']
         except:
-            logger.exception('Something went terribly wrong while obtaining chat id')
-            logger.debug(response)
+            logger.exception('Error obtaining chat identifier from response, %s', response)
+            return None
 
     def format_url(self, method):
         return f'{self.API_ENDPOINT}/bot{self.token}/{method}'

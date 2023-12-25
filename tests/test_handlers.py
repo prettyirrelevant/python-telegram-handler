@@ -84,7 +84,8 @@ def test_emit_http_exception(handler):
         handler.emit(record)
 
     assert telegram_handler.handlers.logger.handlers[0].messages['error']
-    assert telegram_handler.handlers.logger.handlers[0].messages['debug']
+    assert not telegram_handler.handlers.logger.handlers[0].messages['debug']
+    assert not telegram_handler.handlers.logger.handlers[0].messages['warning']
 
 
 def test_emit_telegram_error(handler):
@@ -97,7 +98,9 @@ def test_emit_telegram_error(handler):
         patch.return_value = response
         handler.emit(record)
 
-    assert telegram_handler.handlers.logger.handlers[0].messages['warning']
+    assert not telegram_handler.handlers.logger.handlers[0].messages['debug']
+    assert not telegram_handler.handlers.logger.handlers[0].messages['error']
+    assert not telegram_handler.handlers.logger.handlers[0].messages['warning']
 
 
 def test_get_chat_id_success(handler):
@@ -141,7 +144,6 @@ def test_get_chat_id_response_invalid_format(handler):
         assert handler.get_chat_id() is None
 
     assert telegram_handler.handlers.logger.handlers[0].messages['error']
-    assert telegram_handler.handlers.logger.handlers[0].messages['debug']
 
 
 def test_handler_init_without_chat():
