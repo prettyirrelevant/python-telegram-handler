@@ -1,8 +1,7 @@
 from distutils.core import setup
 
 with open('README.rst') as readme:
-    with open('HISTORY.rst') as history:
-        long_description = readme.read()
+    long_description = readme.read()
 
 VERSION = '2.2.1'
 
