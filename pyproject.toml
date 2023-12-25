@@ -22,7 +22,7 @@ repository = "https://github.com/prettyirrelevant/python-telegram-handler"
 description = "A python logging handler that sends logs via Telegram Bot API"
 
 [tool.poetry.dependencies]
-python = ">= 3.8, <= 3.12"
+python = ">= 3.8, < 3.13"
 requests = "^2.31.0"
 
 [tool.poetry.group.test.dependencies]
@@ -139,8 +139,6 @@ exclude = [".venv", ".tox"]
 inline-quotes = "single"
 
 
-
 [tool.coverage.run]
 branch = true
-source = "telegram_handler"
 omit = ["telegram_handler/__init__.py", "telegram_handler/__main__.py"]
