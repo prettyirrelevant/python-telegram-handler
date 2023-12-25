@@ -28,25 +28,17 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Load cached poetry installation
-        id: cached-poetry
-        uses: actions/cache@v3
-        with:
-          path: ~/.local
-          key: poetry-0
-
       - name: Install Poetry
-        if: steps.cached-poetry.outputs.cache-hit != 'true'
-        uses: snok/install-poetry@v1.3.1
+        uses: snok/install-poetry@v1
         with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
+          virtualenvs-create: false
+          virtualenvs-in-project: false
 
       - name: Install Dependencies
-        run: poetry add tox tox-gh-actions
+        run: poetry add tox tox-gh
 
       - name: Run Test Suite
-        run: poetry run tox
+        run: tox
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3

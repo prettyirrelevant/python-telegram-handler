@@ -1,8 +1,3 @@
-def escape_html(text):
-    """
-    Escapes all html characters in text
-
-    :param str text:
-    :rtype: str
-    """
+def escape_html(text: str) -> str:
+    """Escapes all html characters in text."""
     return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
