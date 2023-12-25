@@ -13,7 +13,14 @@ Via pip:
 
 .. code-block:: shell
 
-    pip install python-telegram-handler
+    pip install 'python-telegram-handler @ git+https://github.com/prettyirrelevant/python-telegram-handler@9ade835ec479511470414103138db0645786fa07'
+
+
+Via Poetry:
+
+.. code-block:: shell
+
+    poetry add git+https://github.com/prettyirrelevant/python-telegram-handler.git#9ade835ec479511470414103138db0645786fa07
 
 Usage
 =====
