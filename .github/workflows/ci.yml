@@ -35,7 +35,7 @@ jobs:
           virtualenvs-in-project: false
 
       - name: Install Dependencies
-        run: poetry add tox tox-gh-actions
+        run: poetry add tox tox-gh
 
       - name: Run Test Suite
         run: tox
