@@ -14,14 +14,13 @@ def main():
     args = parser.parse_args()
     token = args.token
 
-    handler = TelegramHandler(token, 'foo')
+    handler = TelegramHandler(token=token, chat_id='foo')
     chat_id = handler.get_chat_id()
     if not chat_id:
-        logger.info('Did not get chat id')
-        logger.info(handler.last_response.status_code, handler.last_response.text)
+        print('Could not retrieve Chat ID')
         sys.exit(-1)
 
-    logger.info(chat_id)
+    print(f'Chat ID: {chat_id}')
 
 
 if __name__ == '__main__':  # pragma: no cover
